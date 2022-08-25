@@ -1,0 +1,41 @@
+ use book
+db.createCollection("book")
+
+db.book.insert=({isbn:"e40", bname:"let us C", author:["yeshwanth", "kanaka"], year:2012, publisher:"pearson", price:100})
+db.book.insert=({isbn:"e30", bname:"metadata in big data", author:["kuvempu", "herbet"], year:2013, publisher:"pearson", price:1100})
+db.book.insert=({isbn:"e50", bname:"2 states", author:["chetan", "bhagat"], year:2014, publisher:"agarwal", price:1400})
+db.book.insert=({isbn:"e60", bname:"its started with a friend request", author:["ravinder", "singh"], year:2015, publisher:"agarwal", price:1200})
+db.book.insert=({isbn:"e70", bname:"wings of fire", author:["abdul", "kalam"], year:2018, publisher:"agarwal", price:1850})
+
+#list all the docs
+db.book.find().pretty()
+
+#list the book name except year and price
+ db.book.find({},{year:0,price:0})
+
+#display the book authored by rudresh
+> db.book.find({authore:"rudresh"})
+
+#list all books published by pearson
+ db.book.find({publisher:"pearson"})
+
+#list the publisher of book java
+ db.book.find({bname:"java"},{publisher:1,bname:1,_id:0})
+
+#list the author publisher and year of the book let us see
+db.book.find({bname:"let us see"},{publisher:1,bname:1,authore:1,year:1,_id:0})
+
+#display the price of let us see except _id
+ db.book.find({bname:"let us see"},{price:1,bname:1,_id:0})
+
+#sort nd display the book in ascending order of book names
+ db.book.find({},{bname:1,_id:0}).sort({bname:1})
+
+#sort and display only 3 books in descending order of price
+ db.book.find({},{_id:0}).sort({price:-1}).limit(3)
+
+#display the books written by herbett and kuvempu?
+ db.book.find({"author"}:{$in:["herbet","kuvempu"]}},{"bname":1,"_id":0})
+
+#display thr books where rama is 1st author?
+ db.book.find({"author.0":"rama"},{"bname":1,"_id":0})

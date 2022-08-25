@@ -1,0 +1,51 @@
+use employee
+db.createCollection("emp")
+
+db.emp.insert({eid:002,ename:"kiran",dept:"production",desig:"hr",salary:40000,yoj:2016,address:{dno:47,street:3,locality:"JPnagar", city:"bangalore"}})
+db.emp.insert({eid:003,ename:"megha",dept:"developer",desig:"manager",salary:45000,yoj:2019,address:{dno:7,street:9,locality:"jayanagar", city:"bangalore"}})
+db.emp.insert({eid:004,ename:"nayan",dept:"production",desig:"intern",salary:65000,yoj:2014,address:{dno:6,street:4,locality:"kalyanagar", city:"bangalore"}})
+db.emp.insert({eid:005,ename:"mahi",dept:"developer",desig:"hr",salary:30000,yoj:2015,address:{dno:42,street:7,locality:"kslayout", city:"bangalore"}})
+db.emp.insert({eid:006,ename:"niko",dept:"developer",desig:"fresher",salary:50000,yoj:2018,address:{dno:16,street:8,locality:"marathalli", city:"bangalore"}})
+db.emp.insert({eid:007,ename:"manu",dept:"production",desig:"manager",salary:30000,yoj:2020,address:{dno:61,street:5,locality:"kuvempunagar", city:"bangalore"}})
+db.emp.insert({eid:008,ename:"sumith",dept:"production",desig:"hr",salary:40000,yoj:2021,address:{dno:15,street:2,locality:"krpuram", city:"bangalore"}})
+db.emp.insert({eid:009,ename:"manasa",dept:"developer",desig:"TL",salary:48000,yoj:2022,address:{dno:12,street:9,locality:"bagalur", city:"bangalore"}})
+db.emp.insert({eid:024,ename:"sohith",dept:"production",desig:"intern",salary:60000,yoj:2020,address:{dno:59,street:18,locality:"yelahanka", city:"bangalore"}})
+db.emp.insert({eid:051,ename:"mohith",dept:"developer",desig:"manager",salary:50000,yoj:2003,address:{dno:52,street:21,locality:"vvpuram", city:"bangalore"}})
+
+#display salary from range (5000,75000)
+db.emp.find({$and:[{salary:{$gt:50000}},{salary:{$lt:75000}}]})
+
+#display emp with department developer
+ db.emp.find({desig:”developer”},{ename:1,desig:1,_id:0})
+
+
+#display salary of megha?
+db.emp.find({ename:"megha"},{ename:1,salary:1,_id:0})
+
+
+#display the city of emp megha?
+db.emp.find({ename:"megha"},{ename:1,address:{city:1},_id:0})
+
+#update the salary of developer by 5k increment?
+db.emp.update({desig:"developer"},{$inc:{"salary":5000}})
+
+#add field age to emp megha
+db.emp.update({ename:"megha"},{$set:{age:"22"}})
+
+#remove yoj from rahul?
+db.emp.update({ename:"megha"},{$unset:{yoj:1}})
+
+#add an array field project to rahul?
+db.emp.update({ename:"megha"},{$push:{projects:"p1"}})
+
+#add p2 and p3 to rahul?
+db.emp.update({ename:"rahul"},{$push:{projects:{$each:["p2","p3"]}}})
+
+#rmove p3 from rahul?
+db.emp.update({ename:"rahul"},{$pull:{projects:"p3"}})
+
+#add contact email,phone as array object to rahul?
+db.emp.update({ename:"rahul"},{$push:{contacts:{phone:9976553219,email:"rahul@gmail.com"}}})
+
+#add two phpne number to rahul?
+db.emp.update({ename:"rahul"},{$addToSet:{contacts:{phone:[9901180740,9901180440]}}})
