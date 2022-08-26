@@ -1,0 +1,36 @@
+use student
+db.createCollection("student")
+db.stud.insert({SRN:"R21DG043",sname:"santhosh",degree:"MSc",sem:"1st",CGPA:9.1})
+db.stud.insert({SRN:"R21DG023",sname:"lucky",degree:"BCA",sem:"2nd",CGPA:9.8})
+db.stud.insert({SRN:"R21DG006",sname:"pinky",degree:"MCA",sem:"3rd",CGPA:9.4})
+db.stud.insert({SRN:"R21DG009",sname:"maggie",degree:"MCA",sem:"1st",CGPA:9.8})
+db.stud.insert({SRN:"R21DG017",sname:"sam",degree:"BCA",sem:"3rd",CGPA:8.8})
+db.stud.insert({SRN:"R21DG027",sname:"sim",degree:"MCA",sem:"2nd",CGPA:6.8})
+db.stud.insert({SRN:"R21DG047",sname:"rahul",degree:"MCA",sem:"3rd",CGPA:7.8})
+db.stud.insert({SRN:"R21DG065",sname:"vikash",degree:"MSC",sem:"1st",CGPA:6.9})
+db.stud.insert({SRN:"R21DG035",sname:"Ankush",degree:"BCA",sem:"2nd",CGPA:9.5})
+db.stud.insert({SRN:"R21DG025",sname:"Ankitha",degree:"MCA",sem:"1st",CGPA:9.2})
+
+ db.stud.find()
+
+db.stud.find({degree:"BCA"})
+
+db.stud.find({},{sname:1,_id:0}).sort({sname:1})
+
+db.stud.find().limit(5)
+
+db.stud.find().skip(4).limit(3)
+
+db.stud.find({sname:"rahul"},{degree:1,sname:1,_id:0})
+
+db.stud.find().skip(4).limit(3).sort({CGP:-1})
+
+db.stud.count({degree:"BCA"})
+
+db.stud.find({},{_id:0})
+
+db.stud.distinct("degree")
+
+db.stud.find({$and:[{degree:"BCA"},{CGPA:{$gt:6}},{CGPA:{$lt:9}}]}).pretty()
+
+db.stud.find({$and:[{degree:"BCA"},{sem:"3rd"}]})

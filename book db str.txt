@@ -1,0 +1,39 @@
+ use book
+db.createCollection("book")
+
+db.book.insert=({isbn:"e40", bname:"let us C", author:["yeshwanth", "kanaka"], year:2012, publisher:"pearson", price:100})
+db.book.insert=({isbn:"e30", bname:"metadata in big data", author:["kuvempu", "herbet"], year:2013, publisher:"pearson", price:1100})
+db.book.insert=({isbn:"e50", bname:"2 states", author:["chetan", "bhagat"], year:2014, publisher:"agarwal", price:1400})
+db.book.insert=({isbn:"e60", bname:"its started with a friend request", author:["ravinder", "singh"], year:2015, publisher:"agarwal", price:1200})
+db.book.insert=({isbn:"e70", bname:"wings of fire", author:["abdul", "kalam"], year:2018, publisher:"agarwal", price:1850})
+
+
+db.book.find().pretty()
+
+
+db.book.find({},{year:0,price:0})
+
+
+db.book.find({authore:"rudresh"})
+
+
+db.book.find({publisher:"pearson"})
+
+
+db.book.find({bname:"java"},{publisher:1,bname:1,_id:0})
+
+
+db.book.find({bname:"let us see"},{publisher:1,bname:1,authore:1,year:1,_id:0})
+
+db.book.find({bname:"let us see"},{price:1,bname:1,_id:0})
+
+
+db.book.find({},{bname:1,_id:0}).sort({bname:1})
+
+
+db.book.find({},{_id:0}).sort({price:-1}).limit(3)
+
+
+db.book.find({"author"}:{$in:["herbet","kuvempu"]}},{"bname":1,"_id":0})
+
+db.book.find({"author.0":"rama"},{"bname":1,"_id":0})
